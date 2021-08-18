@@ -3,6 +3,11 @@
   "version": "1.0.0",
   "description": "Matrix bot that acts like a work clock",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Kozova1/matrix-WorkClock.git"
+  },
+  "homepage": "https://github.com/Kozova1/matrix-WorkClock",
   "scripts": {
     "start": "tsc index.ts; node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -12,7 +17,7 @@
     "clock",
     "bot"
   ],
-  "author": "Kozova1",
+  "author": "Kozova1 <mug66kk@gmail.com>",
   "license": "GPL-3.0",
   "devDependencies": {
     "tslint": "^5.20.1",
