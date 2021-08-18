@@ -21,7 +21,7 @@ client.on("room.message", handleCommand);
 
 function htmlify(plain: string): string {
     return plain
-        .replace(/\n/g, "<br>") // Newlines => <br>
+        .replace(/  \n/g, "<br>") // Newlines => <br>
         .replace(/```([\s\S]*)```/g, "<code>$1</code>") // ```code``` blocks => <code></code>
         .replace(/`([^`]*)`/g, "<code>$1</code>") // `code` blocks => <code></code>
         .replace(/\[(?<name>.*)\]\((?<target>.*)\)/g, '<a href="$<target>">$<name></a>');
@@ -56,6 +56,12 @@ async function punchOut(uid: string): Promise<string> {
 }
 
 async function list(uid: string): Promise<string> {
+    // Make sure we have punched out
+    const ev = await db.get<TimeEvent>("SELECT * FROM timestamps WHERE uid = ? ORDER BY time DESC", uid);
+    if (ev?.type === "in") {
+        // You already punched in!
+        return "You haven't punched out yet. Punch out before using `!list`";
+    }
     const evs = await db.all<TimeEvent[]>("SELECT * FROM timestamps WHERE uid = ? ORDER BY time ASC", uid);
     const outs: TimeEvent[] = [];
     const ins: TimeEvent[] = [];
@@ -83,8 +89,8 @@ async function list(uid: string): Promise<string> {
 
         return `${hrsFmt}:${minFmt} Spent on ${day}`
     }).reduce((acc, next) => {
-        return acc + "\n" + next; 
-    }, "List of hours:\n");
+        return acc + "  \n" + next; 
+    }, "List of hours:  \n");
 }
 
 async function clear(username: string): Promise<string> {
@@ -104,12 +110,12 @@ async function handleCommand(roomId: string, event: MatrixEvent<TextualMessageEv
     //const cmdArgs = body.split(" ").slice(1);
     switch (cmd) {
         case "!help":
-            const HELP_TEXT = "Help\n" +
-            "`!help` - Show this message\n" +
-            "`!in` - Punch in\n" +
-            "`!out` - Punch out\n" +
-            "`!list` - List hours worked\n" +
-            "`!clear` - Delete all hours worked\n" +
+            const HELP_TEXT = "Help  \n" +
+            "`!help` - Show this message  \n" +
+            "`!in` - Punch in  \n" +
+            "`!out` - Punch out  \n" +
+            "`!list` - List hours worked  \n" +
+            "`!clear` - Delete all hours worked  \n" +
             "\n" +
             "[Source Code available here under the GPLv3 license](https://github.com/Kozova1/matrix-WorkClock.git)";
             client.sendMessage(roomId, RichReply.createFor(
