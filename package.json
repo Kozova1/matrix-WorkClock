@@ -1,0 +1,27 @@
+{
+  "name": "matrix-workclock",
+  "version": "1.0.0",
+  "description": "Matrix bot that acts like a work clock",
+  "main": "index.js",
+  "scripts": {
+    "start": "tsc index.ts; node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "matrix",
+    "clock",
+    "bot"
+  ],
+  "author": "Kozova1",
+  "license": "GPL-3.0",
+  "devDependencies": {
+    "tslint": "^5.20.1",
+    "typescript": "^4.5.0-dev.20210817"
+  },
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "matrix-bot-sdk": "^0.5.19",
+    "sqlite": "^4.0.23",
+    "sqlite3": "^5.0.2"
+  }
+}
