@@ -9,3 +9,12 @@ It supports the following commands:
 - `!clear` - Delete all logged hours. BE CAREFUL WITH THIS!
 
 This bot is distributed under the [GPLv3 license](./LICENSE)
+
+## Installing and Running
+To install and run this, run the following commands:  
+```sh
+git clone https://github.com/Kozova1/matrix-WorkClock
+cd matrix-WorkClock
+npm install
+npm start
+```
